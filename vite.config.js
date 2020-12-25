@@ -5,7 +5,7 @@ module.exports = {
   open: true,
   alias: {
     // 路径映射必须以/开头和结尾
-    "@": path.resolve(__dirname, './src')
+    "/@/": path.resolve(__dirname, './src')
   },
   plugins: [],
   proxy: {}
