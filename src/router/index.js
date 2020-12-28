@@ -2,7 +2,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', name: 'home', component: () => import('/@/components/HelloWorld.vue') }
+  { path: '/', name: 'layout', component: () => import('/@/view/Layout.vue') }
 ]
 
 
