@@ -1,16 +1,14 @@
-import { createApp } from 'vue'
 import { createStore } from 'vuex'
 
+import user from './user'
+
 const store = createStore({
-  state () {
-    return {
-      count: 0
-    }
+  modules: { user },
+  state: {
   },
   mutations: {
-    increment (state) {
-      state.count++
-    }
+  },
+  actions: {
   }
 })
 

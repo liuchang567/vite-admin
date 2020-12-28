@@ -20,7 +20,18 @@
     </el-aside>
     <el-container>
       <el-header class="header">
-        2
+        <h1>Vite Admin</h1>
+        <div>
+          <el-dropdown>
+          <i class="el-icon-setting" style="margin-right: 15px"></i>
+          <template #dropdown>
+            <el-dropdown-menu>
+                <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+          </el-dropdown>
+          <span>{{ $store.state.user.username }}</span>
+        </div>
       </el-header>
       <el-main class="main">
         3
@@ -33,6 +44,11 @@
 
 export default {
   name: 'layout',
-  components: {}
+  components: {},
+  methods: {
+    logout () {
+      this.$store.dispatch('user/logout')
+    }
+  }
 }
 </script>

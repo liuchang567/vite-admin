@@ -6,6 +6,8 @@ import 'element-plus/lib/theme-chalk/index.css'
 import store from './store'
 import router from './router'
 
+import './permission'
+
 import App from './App.vue'
 
 import './style/index.css'

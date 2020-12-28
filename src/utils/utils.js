@@ -1,4 +1,4 @@
-import { Loading } from 'element-plus'
+import { ElLoading } from 'element-plus'
 
 const required = () => { throw new Error('Missing parameter') }
 
@@ -7,7 +7,7 @@ let loadingInstance = null
 let loadCount = 0
 function openLoading () {
   if (loadCount === 0) {
-    loadingInstance = Loading.service({
+    loadingInstance = ElLoading.service({
       lock: true,
       background: 'rgba(255, 255, 255, 0.37)'
     })
