@@ -1,4 +1,4 @@
-import router, { resetRouter } from '/@/router/index'
+import router, { resetRouter, components } from '/@/router/index'
 import { getLocalStorage, setLocalStorage, remLocalStorage } from '/@/utils/utils'
 import API from '/@/api/index'
 
@@ -28,7 +28,7 @@ export default {
         setLocalStorage('TOKEN', resp.data.token)
         commit('SET_USERID', resp.data.userId)
         commit('SET_USERNAME', resp.data.userName)
-        router.replace('/').catch(() => {})
+        router.replace('/')
         return resp
       })
     },
@@ -43,9 +43,6 @@ export default {
     getUserMenus ({ commit }) {
       return API.user.getUserMenus().then(resp => {
         const asyncRoutes = generateRoutes(resp.data)
-        router.addRoute([
-          ...asyncRoutes
-        ])
         commit('SET_MENUS', asyncRoutes)
       })
     }
@@ -57,14 +54,22 @@ function generateRoutes (list = []) {
     const _item = {
       id: item.id,
       parentId: item.parentId,
-      path: item.path || '',
-      meta: { title: item.menuName },
+      path: item.path,
+      meta: { title: item.menuName, isSingle: item.isSingle },
       component: item.component,
       name: item.name,
       orderNum: item.orderNum,
       icon: item.icon
     }
     return _item
+  })
+
+  list.forEach(item => {
+    if (item.component !== 'Layout') {
+      router.addRoute('home', {
+        path: item.path, name: item.name,  component: components[item.component]
+      })
+    }
   })
 
   const treeData = list.filter(father => {
