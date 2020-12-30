@@ -28,7 +28,7 @@ const router = createRoute()
 // reset router
 export function resetRouter () {
   const newRouter = createRoute()
-  router.matcher = newRouter.matcher
+  router.resolve = newRouter.resolve
 }
 
 export default router

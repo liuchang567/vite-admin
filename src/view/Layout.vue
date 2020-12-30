@@ -1,7 +1,7 @@
 <template>
   <el-container class="container">
     <el-aside class="aside" width="200">
-      <el-menu :default-active="$route.path" unique-opened router>
+      <el-menu :default-active="currentRoutePath" unique-opened router>
         <template v-for="route in menus">
           <el-menu-item v-if="route.meta.isSingle" :key="route.path" :index="route.path">
             <template #title><i :class="route.icon"></i>{{route.meta.title}}</template>
@@ -37,23 +37,29 @@
 </template>
 
 <script>
-import { computed  } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from "vue-router"
+
 export default {
   name: 'layout',
   components: {},
   setup() {
+    const currentR = useRouter()
+    const currentRoutePath  = ref(currentR.currentRoute.value.path)
     const store = useStore()
     const username = computed(() => store.state.user.username)
     const menus = computed(() => store.state.user.userMenus)
-    return {
-      username,
-      menus
+
+    const logout = () => {
+      store.dispatch('user/logout')
     }
-  },
-  methods: {
-    logout () {
-      this.$store.dispatch('user/logout')
+
+    return {
+      currentRoutePath,
+      username,
+      menus,
+      logout
     }
   }
 }
